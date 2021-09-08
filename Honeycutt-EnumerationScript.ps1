@@ -45,13 +45,13 @@ Write-Output "******************************************************************
 
 # Running Services
 Write-Output "Current runing services and status"
-get-service | select name,status | sort name
+get-service | Select-Object name,status | sort-object name
 Write-Output ""
 Write-Output "************************************************************************************"
 
 # Running Processes
 Write-Output "Current running proceses and count"
-Get-Process | Group-Object name | Select-Object count,name | sort name | Format-Table -AutoSize
+Get-Process | Group-Object name | Select-Object count,name | sort-object name | Format-Table -AutoSize
 Write-Output ""
 Write-Output "************************************************************************************"
 
@@ -63,19 +63,19 @@ Write-Output "******************************************************************
 
 #plug and Play
 Write-Output "Plug and Play Devices"
-Get-PnpDevice | Group-Object Friendlyname | Select count,name | Format-Table -AutoSize
+Get-PnpDevice | Group-Object Friendlyname | Select-Object count,name | Format-Table -AutoSize
 Write-Output ""
 Write-Output "************************************************************************************"
 
 #Shared Resources
 Write-Output "List of Shared folders"
-get-smbshare | select name,path | Format-Table -AutoSize
+get-smbshare | Select-Object name,path | Format-Table -AutoSize
 Write-Output ""
 Write-Output "************************************************************************************"
 
 #Schedualed tasks
 Write-Output "List of schedualed tasks" 
-Get-ScheduledTask | select Taskname,State | sort TaskName
+Get-ScheduledTask | Select-Object Taskname,State | sort-object TaskName
 Write-Output ""
 Write-Output "************************************************************************************"
 
@@ -83,19 +83,19 @@ Write-Output "******************************************************************
 
 # Machine IP Address
 Write-Output "System IP Address"
-Get-NetIPAddress | select IPAddress | Format-Table -AutoSize
+Get-NetIPAddress | Select-Object IPAddress | Format-Table -AutoSize
 Write-Output ""
 Write-Output "************************************************************************************"
 
 # Listening network sockets
 Write-output "Listening and Established Ports"
-Get-NetTCPConnection | where {($_.State -like "Established*") -or ($_.State -like "Listen")} | Format-Table -AutoSize
+Get-NetTCPConnection | Where-Object {($_.State -like "Established*") -or ($_.State -like "Listen")} | Format-Table -AutoSize
 Write-Output ""
 Write-Output "************************************************************************************"
 
 # Network Adapter Information
 Write-Output "Network Adapter Information"
-Get-NetAdapter | select Name,InterfaceDescription,MacAddress | Format-Table -AutoSize
+Get-NetAdapter | Select-Object Name,InterfaceDescription,MacAddress | Format-Table -AutoSize
 Write-Output ""
 Write-Output "************************************************************************************"
 
@@ -113,7 +113,7 @@ Write-Output "******************************************************************
 
 # Network Mapped Drives
 Write-Output "List of Mapped Drives"
-Get-WmiObject -Class Win32_MappedLogicalDisk | select name,ProviderName
+Get-WmiObject -Class Win32_MappedLogicalDisk | Select-Object name,ProviderName
 Write-Output ""
 Write-Output "************************************************************************************"
 
