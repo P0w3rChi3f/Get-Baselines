@@ -24,7 +24,7 @@ foreach ($machine in $ReplyResults){
     if ($exists -eq $false){
     new-item -ItemType Directory -Name $machine
     }
-  
+    
     Write-host "$machine User List"
     Write-host "#########################################################################################"
     wmic /NODE:$machine /USER:"Demo.local\vagrant" /PASSWORD:"vagrant" os get csname | Tee-Object -FilePath .\$machine\$machine-User-list.txt -Append
