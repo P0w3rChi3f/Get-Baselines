@@ -69,3 +69,37 @@ foreach ($machine in $ReplyResults){
 
 
 }
+
+##################################################
+# Compare the Reports
+##################################################
+
+$ReportFile = Get-ChildItem -Recurse | Where-Object {($_.Extension -eq ".txt") -and ($_.name -like "*Application*")} | Get-Content 
+
+
+$reports = .\192.168.42.230\192.168.42.230-Application-list.txt
+$testReport = Get-Content $reports
+foreach ($line in $testReport){write-host ($line -Split '\s\s+')[2]}
+
+
+foreach ($line in $testReport){$splitLine = ($line -Split '\s\s+'); $output | Add-Member -NotePropertyValue $splitLine[0], $splitLine[1], $splitLine[2], $splitLine[3], $splitLine[4], $splitLine[5]}
+
+##########################################################################################################################
+
+$TestFile = Get-Content .\192.168.42.230\192.168.42.230-Application-list.txt
+
+$L = 0
+
+$ReportObject = [PSCustomObject]@{}
+
+foreach ($line in $TestFile){
+
+	$splitline = ($line -Split '\s\s+')
+
+    if ($L -eq 2) {$hostname = $splitLine[0]}
+    elseif ($L -eq 6) {}
+    elseif (($line.Length -gt 0) -and ($line[$L] -ne 6)) {Add-Member -InputObject $ReportObject @{Hostname = $hostname; Caption = $splitLine[0]; IdentifyingNumber = $splitLine[1]; Name = $splitLine[2]; Vendor = $splitLine[3]; version = $splitLine[4]}}
+    
+    $L++    
+	
+}
