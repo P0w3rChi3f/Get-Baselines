@@ -67,7 +67,12 @@ foreach ($machine in $ReplyResults){
     wmic /NODE:$machine /USER:"Demo.local\vagrant" /PASSWORD:"vagrant" volume list brief | Tee-Object -FilePath .\$machine\$machine-Volue-list.txt -Append
     Write-host "#########################################################################################"
 
-
+    Write-host "$machine Volume List"
+    Write-host "#########################################################################################"
+    wmic /NODE:$machine /USER:"Demo.local\vagrant" /PASSWORD:"vagrant" os get csname | Tee-Object -FilePath .\$machine\$machine-Volume-list.txt -Append
+    wmic /NODE:$machine /USER:"Demo.local\vagrant" /PASSWORD:"vagrant" Win32_InstalledWin32Program | Tee-Object -FilePath .\$machine\$machine-Volue-list.txt -Append
+    Write-host "#########################################################################################"
+    
 }
 
 ##################################################
