@@ -1,0 +1,4 @@
+%temp%\AdobeARM.exe
+iTunesHelper.exe
+%Programs%\startup\AdobeRe.exerouj.exe
+$userprofile%\Local Settings\iexplorer.exe
