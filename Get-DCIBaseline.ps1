@@ -90,13 +90,13 @@ Write-Host "####################################################################
 Write-Host "##################################################################################"
 Write-Host ""
 Write-Host "The following malicious Files were found in the environment:"
-$MalisiousFileFound | Select-Object Name, PSComputerName
+$MalisiousFileFound | Select-Object Name, PSComputerName | Out-Host
 
 Write-Host "##################################################################################"
 Write-Host ""
 Write-Host "The following malicious Registry Items were found in the environment:"
-$MalisiousRegistryItemFound
+$MalisiousRegistryItemFound | Out-Host
 Write-Host "##################################################################################"
 Write-Host ""
 Write-Host "The following malicious Remote Connections were found in the environment:"
-$malisiousRemoteConnection | Select-Object RemoteAddress, PScomputername
+$malisiousRemoteConnection | Select-Object RemoteAddress, PScomputername | Out-Host
