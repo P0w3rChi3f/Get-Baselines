@@ -33,7 +33,7 @@ foreach ($IP in $IPList) {
 $fileIOCs = get-content .\IOCs\Files.txt
 $filePath = $env:TEMP, "$env:Programfiles\Startup", "$env:USERProfile\Local Settings", "$env:Appdata\Microsoft"
 $IPIOCs = Get-Content .\IOCs\IPs.txt
-$regIOCs = Get-Content .\IOCs\reg.csv
+$regIOCs = Import-Csv .\IOCs\reg.csv
 
 # Get File IOCs (iexplore.exe, adobeupdater.exe, wuauclt.exe (On every Host)) 
      #need to suppress the errors
@@ -48,7 +48,7 @@ $remoteFiles = Invoke-Command -ComputerName $enabledConnections -ScriptBlock {
 foreach ($file in $remoteFiles){
     $found = $file -in $fileIOCs
     if ($found -eq $true) {
-        $file | Select-Object Name, PScomputername, FullName
+        #$file | Select-Object Name, PScomputername, FullName
         $MalisiousFileFound += $file
     }
 }
@@ -65,7 +65,7 @@ $regRunItems = Invoke-Command -ComputerName $enabledConnections -Command {
 foreach ($item in $regRunItems.property){
     $found = $item -in $regIOCs.file
     if ($found -eq $true){
-        $item
+        #$item
         $MalisiousRegistryItemFound += $item
     }
 }
@@ -80,7 +80,7 @@ $RemoteConnections = Invoke-Command -ComputerName $enabledConnections -Command {
 Foreach ($address in $RemoteConnections){
     $found = $address.RemoteAddress -in $IPIOCs
     if ($found -eq $true){
-        $address | Select-Object PScomputername, RemoteAddress
+        #$address | Select-Object PScomputername, RemoteAddress
         $malisiousRemoteConnection += $address
     }
 }
