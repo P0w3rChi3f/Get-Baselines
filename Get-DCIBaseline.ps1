@@ -38,7 +38,7 @@ $regIOCs = Import-Csv .\IOCs\reg.csv
 # Get File IOCs (iexplore.exe, adobeupdater.exe, wuauclt.exe (On every Host)) 
      #need to suppress the errors
 
-reg     $MalisiousFileFound = @()
+$MalisiousFileFound = @()
 $remoteFiles = Invoke-Command -ComputerName $enabledConnections -ScriptBlock {
     foreach ($path in $using:filePath) {
             Get-ChildItem -Path $path
